@@ -1,10 +1,18 @@
 \begin{thebibliography}{1}
 
+\bibitem{weka}
+M.~L.~G. at~the University~of Waikato.
+\newblock Weka 3: Data mining software in java, 2012.
+
 \bibitem{blitzer2007biographies}
 J.~Blitzer, M.~Dredze, and F.~Pereira.
 \newblock Biographies, bollywood, boom-boxes and blenders: Domain adaptation
   for sentiment classification.
 \newblock In {\em Annual Meeting-Association For Computational Linguistics},
   volume~45, page 440, 2007.
+
+\bibitem{nltk}
+N.~Project.
+\newblock Natural language toolkit, 2012.
 
 \end{thebibliography}

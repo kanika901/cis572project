@@ -1,3 +1,54 @@
 \section{Proposal}
-This is our proposal.\cite{blitzer2007biographies}
+With the rise of online commercial marketplaces such as Amazon.com,
+user-generated product reviews have become increasingly more influential sources of information.
+User reviews affect more than the purchasing decisions of other consumers;
+such content also informs decisions in product marketing, sales, and so on.
+In particular, if consumer sentiments--positive or negative views, attitudes, emotions, appraisals about an entity--could be 
+extracted from a corpus of reviews, such information could be leveraged toward improving future sales.
 
+The difficulty with performing sentiment analysis on user-generated reviews is somewhat self-explanatory--
+human-generated text is nontrivial to parse by machines. Grammar and syntactic issues aside,
+consumers post reviews from a wide range of contexts. How will a machine know the difference
+between the glowing reviews of the Acme Spam-Blender by Farmer John, a Caucasian middle-aged farmer in western Kansas,
+versus that of Pooja Verma, a urban high school student in Delhi? Such intricacies require
+a specialized process by which sentiment analysis is achieved.
+
+Our project involves leveraging NLTK\cite{nltk}, a natural language processing toolkit,
+for the purpose of sentiment analysis on user-generated product reviews.
+Our goal is to determine whether we can accurately predict the user ratings and/or sentiments
+from a corpus of reviews using a variety of machine learning algorithms.
+Using NLTK, we will extract a set of features from the reviews and
+use those features in the learning tasks.
+Secondarily, we are interested in investigating which algorithm performs best given the nature of the data.
+
+%dataset
+The dataset that we are using for this project is a corpus of Amazon.com user reviews from four different product domains:
+\begin{enumerate}
+\item books,
+\item DVDs,
+\item electronics, and
+\item kitchen appliances.
+\end{enumerate}
+This dataset was made available by John Blitzer et al of the University of Pennsylvania\cite{blitzer2007biographies},
+who performed some of the seminal work in this area.
+
+%features
+While we still need to investigate the feature space, possibilities include:
+\begin{enumerate}
+\item N-grams,
+\item parts of speech,
+\item sentiment lexicons (grouping of words in emotion and content categories), and
+\item synomym-sets (sets of synonyms for words in the review).
+\end{enumerate}
+
+%algorithms
+The algorithms that we will employ include Naive Bayes, decision trees, and logistic regression.
+We will leverage WEKA\cite{weka} data mining software, which contains implementations of these algorithms.
+
+%metrics
+We will measure this sentiment analysis task by the accuracy of the predictions made by our algorithms.
+This could take multiple forms: for example, we should determine how accurately our algorithms
+predicts the number of stars in a given review, as well as how well they predict favorable versus critical categories
+(defined by Amazon as 4 to 5 stars, and 1 to 3 stars respectively). 
+We could also extend this analysis by measuring our accuracy on polarized reviews (1 or 5 stars),
+as well as how well our algorithms could predict the most helpful favorable or critical reviews.

@@ -1,0 +1,18 @@
+\section{Related Work}
+\label{related}
+The topics of synchronization and replication strategies have been considerably researched
+within the general domain of distributed file systems.
+Much of this work has focused on replica maintenance for the purpose of data availability~\cite{pu1991replica,damani1999optimistic,goel2006data,chun2006replica,ford2010availability}.
+Pu et al's work discusses various replica control mechanisms for maintaining epsilon-copy serializability (ESR), 
+a correctness criterion that allows asynchronous maintenance of mutual consistency for replicas~\cite{pu1991replica}. 
+However, their evaluation does not extend to specific domains of distributed file systems.
+Their research also lays valuable foundations for evaluating replication strategies in specific domains (\ie~\cite{ford2010availability}). 
+While we also build on Pu et al's groundwork, our emphasis on automated synchronization and privacy constitute a distinct focus from other follow up research.
+
+In another similar work, Chun et al evaluate replication strategies for storage systems distributed over the Internet~\cite{chun2006replica}.
+Their research focuses on data durability, the assurance that data put into the system is not lost due to disk failures, and claims that this property be held more important than conventional availability.
+While their work uncovers a valuable property that should be widely applicable in distributed storage systems,
+our research focuses specifically on availability as a necessary prerequisite of automated synchronization.
+
+To the best of our knowledge, our we are the first to present a tested design for a distributed file 
+hosting system optimized for large-scale, real-time collaboration and lacking any central storage.

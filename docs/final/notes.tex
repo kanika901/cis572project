@@ -1,0 +1,42 @@
+\section{UPDATE}
+\subsection{(1) Brief synopsis of our project:}
+We're looking into file hosting systems such as Dropbox, which are popular tools for remote file storage and backup, collaborative work, and file sharing.
+These systems rely on centralized storage, which have inherent privacy issues and present a central point of failure.
+One solution to this problem would be to distribute data storage across all users by storing replicas on individual user machines.
+Such a distributed file hosting system must handle many things: replication strategy, node departures and failures, reads/writes, etc.
+So, given users with dynamic online times (and possible failures), can we provide a distributed file hosting system that allows online reads/writes and high data availability?
+
+\subsection{(2) What have we done:}
+  a] We've done literature review on distributed storage systems, available replication/synchronization strategies, and similar work on evaluating the above
+    b] We've handled a number of design decisions involving:
+          -communication model: TCP sockets
+                -architecture: clients with local storage, and a broker network that handles client read/write operations (and necessary replication) and group membership
+                      -race conditions: how to handle competing operations/how to order operations, how to lock and unlock and queue requests
+                            -failures: how to handle when a node goes offline/crashes, how to update a node upon reentry/recovery
+                                  -???evaluation: metrics=availability,network overhead,correctness and parameters=node churn, ???
+                                    c] We've implemented:
+                                          -client: watches local directory and communicates with broker (pushes/pulls updates)
+                                                -broker: communicates with clients, handles updates
+                                                
+\subsection{(3) Where are we now:}
+                                                  a] We're finishing up client-broker communication:
+                                                        -synchronization policies, local timestamps, locks
+                                                          b] We're designing/building the test environment
+                                                          (4) What we would like to discuss:
+                                                            a] What to measure?
+                                                                  -policies?
+                                                                        -vs centralized server?
+                                                                          b] How to measure?
+                                                                                -availability?
+                                                                                      -correctness?
+                                                                                            -overhead?
+\subsection{last notes}
+no two people should init at same time
+no other clients to pull from = out of date..ok?
+major bug = delay on copy
+every client goes offline and deletes everything..who to pull from?
+NETWORK PARTITION?
+broker dies?
+
+VS DROPBOX
+delta sync - no need since it's been done before

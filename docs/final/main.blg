@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2010)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: abbrv.bst
+Database file #1: project.bib.bib
+I was expecting a `,' or a `}'---line 98 of file project.bib.bib
+ :  
+ :  url = {http://blog.benrhughes.com/mercurial-on-dropbox},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in dropboxmercurial
+Warning--can't use both volume and number fields in pu1991replica
+You've used 15 entries,
+            2118 wiz_defined-function locations,
+            571 strings with 6120 characters,
+and the built_in function-call counts, 4586 in all, are:
+= -- 418
+> -- 238
+< -- 6
++ -- 95
+- -- 80
+* -- 273
+:= -- 745
+add.period$ -- 41
+call.type$ -- 15
+change.case$ -- 85
+chr.to.int$ -- 0
+cite$ -- 17
+duplicate$ -- 173
+empty$ -- 388
+format.name$ -- 80
+if$ -- 980
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 8
+newline$ -- 72
+num.names$ -- 28
+pop$ -- 134
+preamble$ -- 1
+purify$ -- 70
+quote$ -- 0
+skip$ -- 144
+stack$ -- 0
+substring$ -- 164
+swap$ -- 46
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 58
+warning$ -- 2
+while$ -- 38
+width$ -- 17
+write$ -- 149
+(There was 1 error message)

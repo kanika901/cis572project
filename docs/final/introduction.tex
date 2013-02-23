@@ -1,0 +1,120 @@
+\section{Introduction}
+\label{introduction}
+% Introduction to file hosting systems
+Of the wide range of today's Internet tools,
+file hosting systems such as Dropbox and Google Drive are certainly among the most popular.
+These systems offer convenient (and often cheap) means
+to store and backup data, in addition to making that data available
+to any device with Internet access and the proper credentials.
+The ever-growing ubiquity of Internet access
+and the advent of cloud storage have helped
+these systems flourish,
+allowing them to serve billions of files for millions of users.
+
+As the most popular file hosting system on today's Internet,
+Dropbox leads the way in this growing domain.
+Since January 2010, Dropbox has steadily expanded from about 4 million to 100 million users,
+and increased its usage rate from roughly 250 million to 1 billion files saved per day~\cite{dropboxstats}.
+Stop for a moment and consider the sheer magnitude of these statistics:
+even roughly averaged, this means that Dropbox users collectively save over
+1 million files \emph{every two minutes}.
+
+This frequency of usage points to a key aspect of Dropbox's popularity:
+its capacity for collaborative work.
+The system allows its users to share data with other select users
+in the so-called working group, and also keep a local copy
+of the shared data on any owned machine or device.
+Most importantly, Dropbox synchronizes quickly and automatically across local and cloud replicas
+by employing \textbf{delta encoding},
+in which only the \emph{changes} to files are saved and uploaded.
+The efficiency of this synchronization strategy makes Dropbox a convenient tool
+for both synchronous and asynchronous collaboration among working groups.
+The benefits of these features have not gone
+unnoticed, and continue to attract attention~\cite{dropboxmercurial,dropboxcollab}.
+
+% Privacy problem with file hosting systems
+When we consider data privacy in Dropbox and other cloud-based file hosting systems, however, we see that not everything is silver lining.
+Privacy issues with cloud services have recently
+fallen under scrutiny by the security community~\cite{van2010impossibility,soghoian2010caught}, and Dropbox has not escaped this critical eye.
+Aside from a few exposed security issues~\cite{mulazzani2011dark,dropboxsecurity},
+the top file hosting system has been criticized for its policies on data discretion.
+In order to facilitate delta encoding,
+Dropbox maintains encryption keys to calculate hashes for saved files. When a change is detected in a shared folder,
+Dropbox hashes blocks of the data and uses those hashes to see if they are stored \emph{anywhere} on \emph{any} of its servers.
+Using this information, it only needs to upload the new chunks. This seemingly clever trick can enable a gigabyte file to almost 'magically'
+upload in seconds. This is a huge boon for the company, as it allows them to offer more space to clients at almost no cost if the client is sharing
+data shared somewhere else. 
+
+Unfortunately, this optimization comes at the cost of security. One simple attack is immediately obvious: 
+Imagine an agent, Alice, that wants to know if a given copy-writed media file has been shared on Dropbox.
+She could simply create a Dropbox account, add the file to her shared folder and watch to see how quickly it uploads. 
+If it uploaded far too quickly, she immediately knows that it has already been uploaded and hashed somewhere else.
+She could then obtain a subpoena to require Dropbox to disclose which users have this file. Since Dropbox does not 
+let users control how their files are encrypted, and since they have already hashed the location of every block of this file,
+they can easily determine who has these files and would be required by law to report them.~\cite{dropboxprivacy}.
+
+One solution to the privacy issues of centralized data would be to distribute
+data storage across users' local machines.
+The file hosting system itself would remain blind to this data, 
+and merely marshall encrypted updates between user machines to handle synchronization.
+For such a distributed file hosting system to be successful, it would have to achieve
+the following design goals (in addition to privacy):
+\begin{itemize}
+    \item \textbf{Accuracy:} The system must be able to properly synchronize all updates across all \emph{online} users. In other words, whenever a user needs to pull
+    data from the system, it must pull a completely up-to-date copy.  Furthermore, a user should not push outdated data to the system.
+    \item \textbf{Transparency:} The system itself should largely be transparent to the user. 
+    To facilitate transparency, the system must enable automated and asynchronous updates for shared data. When a user is online,
+    changes should be pushed immediately after they occur. In addition, a user should not have to block and wait for the system to update.
+    \item \textbf{Scalability:} The system must be scalable with respect to increasing workloads and working group sizes.
+    \item \textbf{Efficiency:} The system must be efficient with respect to the latency of message and data transfers.
+    In particular, the amount of extra information (beyond file data) 
+    that is passed between networked entities should be small.
+\end{itemize}
+
+% Potential Solution: Distributed file hosting system
+In this work, we present D-Sync, a distributed and automatically synchronizing file hosting
+architecture that addresses the privacy issues of centralized data storage.
+D-Sync addresses these concerns
+by distributing data in workspace directories across user machines, called \textbf{clients}.
+Clients make changes to the files within their local workspace,
+and changes are automatically pushed to the system.
+A \textbf{broker} program marshalls these changes and ensures that all online local workspaces are updated,
+but remains blind to the actual data itself.
+In this manner, working groups can collaborate efficiently over the Internet
+without the privacy concerns of centralized data.
+
+% How we evaluate the system
+We evaluate our system's performance with respect to the latency
+of synchronization across different networking scenarios.
+In particular, we measure the total time it takes to synchronize
+all clients with variable working group and update file size.
+We also benchmark our system against Dropbox's performance.
+Our comparative analysis shows that the D-Sync architecture
+scales reasonably with larger working groups and workloads,
+and furthermore outperforms Dropbox in several scenarios.
+
+The contributions of this work include:
+\begin{itemize}
+\item \emph{D-Sync: a distributed file hosting architecture.} 
+automated synchronization of files and protects the privacy of its users.
+Our architecture includes schematics for its major components (clients and brokers) as well as a communication protocol and automated synchronization strategy.
+While similar proposals exist, to the best of our knowledge 
+our work is the first to posit such an architecture as a privacy-preserving alternative to conventional file hosting systems.
+\item \emph{An evaluation of distributed file hosting architectures.}
+In evaluating our prototype system's performance and accuracy,
+we provide a first look at how such architectures may perform
+on various network scenarios.
+Furthermore, we conduct a comparative analysis of Dropbox's
+performance, and present the results in conjunction with our prototype evaluation.
+\end{itemize}
+
+The remainder of our paper is organized as follows.
+In Section~\ref{related} we highlight previous work related to our project.
+Section~\ref{design} covers our system design, including
+its major components and design decisions.
+We evaluate our system in Section~\ref{evaluation}, specifically
+analyzing its performance and synchronization correctness.
+In Section~\ref{discussion} we discuss our work and future directions,
+and finally we conclude in Section~\ref{conclusion}.
+Section~\ref{appendix} contains a brief description
+of our code and division of labor on this project.
